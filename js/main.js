@@ -75,6 +75,18 @@
     try { localStorage.setItem(CONSENT_KEY, value); } catch (e) {}
   }
 
+  // Consent Mode v2: o padrão "denied" é definido no <head> antes do GTM.
+  function grantGoogleConsent() {
+    var dl = window.dataLayer = window.dataLayer || [];
+    function gtag() { dl.push(arguments); }
+    gtag("consent", "update", {
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+      analytics_storage: "granted"
+    });
+  }
+
   function renderCookieBar() {
     var bar = document.createElement("div");
     bar.className = "cookie-bar";
@@ -90,6 +102,7 @@
     bar.querySelector('[data-cookie="accept"]').addEventListener("click", function () {
       setConsent("accepted");
       bar.remove();
+      grantGoogleConsent();
       initAnalytics();
     });
     bar.querySelector('[data-cookie="reject"]').addEventListener("click", function () {
@@ -357,6 +370,7 @@
       }
 
       var url = "https://wa.me/" + CONFIG.WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+      (window.dataLayer = window.dataLayer || []).push({ event: "conversao_formulario" });
       window.open(url, "_blank", "noopener");
       form.reset();
     });

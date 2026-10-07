@@ -2,6 +2,37 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<!-- Google Consent Mode v2: padrão negado até o visitante aceitar os cookies -->
+<script>
+(function(){
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  try {
+    if (localStorage.getItem('innovare_cookie_consent') === 'accepted') {
+      gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted'
+      });
+    }
+  } catch (e) {}
+})();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MBQ758QF');</script>
+<!-- End Google Tag Manager -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forro Mineral em Joinville | Innovare Decorações</title>
 <meta name="description" content="Instalação de forro mineral em Joinville, com resistência à umidade e ótimo custo-benefício para ambientes comerciais. Orçamento grátis.">
@@ -100,6 +131,10 @@
 </script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MBQ758QF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header class="header" id="header">
   <div class="container header__inner">
@@ -117,11 +152,11 @@
     </nav>
 
     <div class="header__actions">
-      <a href="tel:+5547989292335" class="btn btn--ghost btn--sm" data-track="call_header">
+      <a data-conversao="ligacao" href="tel:+5547989292335" class="btn btn--ghost btn--sm" data-track="call_header">
         <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
         (47) 98929-2335
       </a>
-      <a href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn btn--primary btn--sm" data-track="whatsapp_header">
+      <a data-conversao="whatsapp" href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn btn--primary btn--sm" data-track="whatsapp_header">
         <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.7 14.4 3.2 13 3.2 12c0-4.8 3.9-8.7 8.8-8.7s8.8 3.9 8.8 8.7-3.9 8.7-8.8 8.7zm4.8-6.6c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 8.9 9.5 7.6 9.3 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.3 0-.1-.2-.2-.4-.3z"/></svg>
         WhatsApp
       </a>
@@ -146,7 +181,7 @@
     <h1 class="reveal">Forro Mineral em Joinville</h1>
     <div class="hero__cta reveal">
       <a href="#orcamento" class="btn btn--primary btn--lg" data-track="cta_hero_form">Quero meu Orçamento Grátis</a>
-      <a href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn btn--outline btn--lg" data-track="cta_hero_whatsapp">
+      <a data-conversao="whatsapp" href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn btn--outline btn--lg" data-track="cta_hero_whatsapp">
         <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.7 14.4 3.2 13 3.2 12c0-4.8 3.9-8.7 8.8-8.7s8.8 3.9 8.8 8.7-3.9 8.7-8.8 8.7zm4.8-6.6c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 8.9 9.5 7.6 9.3 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.3 0-.1-.2-.2-.4-.3z"/></svg>
         Falar no WhatsApp agora
       </a>
@@ -186,7 +221,7 @@
         <li><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20.3 5.3l-11 11-5.6-5.6 1.4-1.4 4.2 4.2 9.6-9.6z"/></svg> Visita técnica agendada</li>
         <li><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20.3 5.3l-11 11-5.6-5.6 1.4-1.4 4.2 4.2 9.6-9.6z"/></svg> Orçamento sem compromisso</li>
       </ul>
-      <a href="tel:+5547989292335" class="orcamento__phone">
+      <a data-conversao="ligacao" href="tel:+5547989292335" class="orcamento__phone">
         <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
         (47) 98929-2335
       </a>
@@ -279,7 +314,7 @@
     <p>Fale agora com a Innovare Decorações &amp; Revestimentos e peça seu orçamento gratuito.</p>
     <div class="cta-final__buttons">
       <a href="#orcamento" class="btn btn--primary btn--lg" data-track="cta_final_form">Solicitar Orçamento Grátis</a>
-      <a href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn btn--outline-light btn--lg" data-track="cta_final_whatsapp">Chamar no WhatsApp</a>
+      <a data-conversao="whatsapp" href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn btn--outline-light btn--lg" data-track="cta_final_whatsapp">Chamar no WhatsApp</a>
     </div>
   </div>
 </section>
@@ -296,7 +331,7 @@
     </div>
     <div>
       <h4>Contato</h4>
-      <p><a href="tel:+5547989292335">(47) 98929-2335</a></p>
+      <p><a data-conversao="ligacao" href="tel:+5547989292335">(47) 98929-2335</a></p>
       <p>R. Minas Gerais - Nova Brasília,<br>Joinville - SC, 89214-600</p>
       <p>Horário de Atendimento<br>Seg à Sex - 07h30 às 18h00<br>Sáb - 08h00 às 11h30</p>
     </div>
@@ -316,21 +351,21 @@
   </div>
 </footer>
 
-<a href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="float-whatsapp" data-track="whatsapp_float" aria-label="Falar no WhatsApp">
+<a data-conversao="whatsapp" href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="float-whatsapp" data-track="whatsapp_float" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.7 14.4 3.2 13 3.2 12c0-4.8 3.9-8.7 8.8-8.7s8.8 3.9 8.8 8.7-3.9 8.7-8.8 8.7zm4.8-6.6c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 8.9 9.5 7.6 9.3 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.3 0-.1-.2-.2-.4-.3z"/></svg>
 </a>
 
 <div class="mobile-bar">
-  <a href="tel:+5547989292335" class="mobile-bar__btn mobile-bar__btn--call" data-track="call_mobilebar">
+  <a data-conversao="ligacao" href="tel:+5547989292335" class="mobile-bar__btn mobile-bar__btn--call" data-track="call_mobilebar">
     <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
     Ligar
   </a>
-  <a href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="mobile-bar__btn mobile-bar__btn--whatsapp" data-track="whatsapp_mobilebar">
+  <a data-conversao="whatsapp" href="https://wa.me/5547989292335?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="mobile-bar__btn mobile-bar__btn--whatsapp" data-track="whatsapp_mobilebar">
     <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
     WhatsApp
   </a>
 </div>
 
-<script src="../js/main.js?v=2"></script>
+<script src="../js/main.js?v=3"></script>
 </body>
 </html>
