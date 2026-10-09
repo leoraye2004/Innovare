@@ -9,9 +9,11 @@ const SERVICES = [
   {
     slug: "drywall",
     name: "Drywall",
-    h1: "Instalação de Drywall em Joinville",
-    metaTitle: "Instalação de Drywall em Joinville | Innovare Decorações",
-    metaDesc: "Instalação profissional de drywall em Joinville e região para residências, comércios e empresas. Rapidez, acabamento moderno e mão de obra qualificada. Orçamento grátis.",
+    h1: "Drywall em Joinville com Material e Instalação",
+    heroSub: "Paredes, forros e divisórias prontos para pintar, com equipe própria do início ao acabamento.",
+    detailTitle: "Paredes, forros e divisórias em drywall",
+    metaTitle: "Drywall em Joinville com Material e Instalação | Innovare",
+    metaDesc: "Drywall em Joinville com material e instalação inclusos: paredes, forros e divisórias prontos para pintar, feitos por equipe própria. Peça seu orçamento grátis.",
     heroImg: "images/5.png",
     heroAlt: "Equipe da Innovare instalando placa de drywall em Joinville",
     detailImg: "images/old-drywall.jpg",
@@ -562,7 +564,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span>${esc(service.name)}</span>
     </nav>
     <p class="eyebrow reveal">Innovare Decorações &amp; Revestimentos · Joinville - SC</p>
-    <h1 class="reveal">${esc(service.h1)}</h1>
+    <h1 class="reveal">${esc(service.h1)}</h1>${service.heroSub ? `
+    <p class="hero__sub reveal">${esc(service.heroSub)}</p>` : ""}
     <div class="hero__cta reveal">
       <a href="#orcamento" class="btn btn--primary btn--lg" data-track="cta_hero_form">Quero meu Orçamento Grátis</a>
       <a data-conversao="whatsapp" href="${WA_LINK}" target="_blank" rel="noopener" class="btn btn--outline btn--lg" data-track="cta_hero_whatsapp">
@@ -580,7 +583,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div>
       <p class="section__eyebrow reveal">${esc(service.name)}</p>
-      <h2 class="section__title reveal">${esc(service.h1)}</h2>
+      <h2 class="section__title reveal">${esc(service.detailTitle || service.h1)}</h2>
       ${service.intro.map(p => `<p class="reveal">${esc(p)}</p>`).join("\n      ")}
       <ul class="service-detail__benefits">
         ${service.benefits.map(b => `<li class="reveal"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20.3 5.3l-11 11-5.6-5.6 1.4-1.4 4.2 4.2 9.6-9.6z"/></svg> ${esc(b)}</li>`).join("\n        ")}
