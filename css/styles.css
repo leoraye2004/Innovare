@@ -408,6 +408,7 @@ svg{flex-shrink:0;}
   .hero__content{padding-top:120px; padding-bottom:120px;}
   .hero__cta{flex-direction:column; align-items:stretch;}
   .hero__cta .btn{width:100%;}
+  .hero--service h1{font-size:1.85rem;}
   .header__actions .btn--ghost{display:none;}
   .processo__grid{grid-template-columns:1fr;}
   .portfolio__grid{grid-template-columns:1fr; grid-auto-rows:240px;}
