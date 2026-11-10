@@ -90,6 +90,8 @@
   function renderCookieBar() {
     var bar = document.createElement("div");
     bar.className = "cookie-bar";
+    bar.setAttribute("role", "region");
+    bar.setAttribute("aria-label", "Aviso de cookies");
     bar.innerHTML =
       '<p>Usamos cookies para melhorar sua experiência e entender como o site é usado. ' +
       'Você pode aceitar ou recusar.</p>' +

@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { "source": "/servicos/forros.html", "destination": "/servicos/forros-modulares.html", "permanent": true },
+    { "source": "/servicos/forro-modular.html", "destination": "/servicos/forros-modulares.html", "permanent": true },
+    { "source": "/servicos/forro-mineral.html", "destination": "/servicos/forros-modulares.html", "permanent": true },
+    { "source": "/servicos/forro-eps.html", "destination": "/servicos/forros-modulares.html", "permanent": true },
+    { "source": "/servicos/divisorias-navais.html", "destination": "/servicos/divisorias-de-vidro.html", "permanent": true }
+  ]
+}

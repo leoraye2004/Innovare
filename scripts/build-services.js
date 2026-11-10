@@ -1,490 +1,33 @@
 const fs = require("fs");
 const path = require("path");
 
-const SITE_URL = "https://www.innovaredecoracoes.com.br";
+const SITE_URL = "https://www.innovarerevestimentos.com.br";
 const WHATSAPP = "5547989292335";
 const WA_LINK = `https://wa.me/${WHATSAPP}?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento.`;
 
-const SERVICES = [
-  {
-    slug: "drywall",
-    name: "Drywall",
-    h1: "Drywall em Joinville com Material e Instalação",
-    heroSub: "Paredes, forros e divisórias prontos para pintar, com equipe própria do início ao acabamento.",
-    detailTitle: "Paredes, forros e divisórias em drywall",
-    metaTitle: "Drywall em Joinville com Material e Instalação | Innovare",
-    metaDesc: "Drywall em Joinville com material e instalação inclusos: paredes, forros e divisórias prontos para pintar, feitos por equipe própria. Peça seu orçamento grátis.",
-    heroImg: "images/5.webp",
-    heroAlt: "Equipe da Innovare instalando placa de drywall em Joinville",
-    detailImg: "images/old-drywall.webp",
-    detailAlt: "Instalação de drywall em ambiente comercial",
-    intro: [
-      "O drywall é hoje uma das soluções mais usadas para criar e dividir ambientes com rapidez, sem a sujeira e o tempo de uma obra em alvenaria tradicional. Na Innovare, a instalação é feita por equipe própria, do início ao acabamento — nunca vendemos só o material.",
-      "Trabalhamos com drywall em residências, escritórios, lojas, clínicas e ambientes corporativos em Joinville e região, sempre com estrutura reforçada e acabamento pronto para pintura."
-    ],
-    benefits: [
-      "Execução rápida, com menos sujeira e entulho que a alvenaria",
-      "Acabamento liso e moderno, pronto para pintura",
-      "Bom isolamento térmico e acústico entre ambientes",
-      "Flexível para criar salas, sancas, nichos e forros sob medida"
-    ],
-    faq: [
-      ["Quanto tempo leva para instalar uma parede de drywall?", "Depende do tamanho do ambiente, mas costuma ser bem mais rápido que uma parede de alvenaria — muitos projetos ficam prontos em poucos dias."],
-      ["Parede de drywall aguenta pendurar TV e prateleira?", "Sim. A fixação é feita nos montantes da estrutura metálica interna, e nossa equipe já planeja esses pontos de reforço durante a instalação."],
-      ["Drywall isola bem o som entre os ambientes?", "Isola, principalmente quando combinado com manta acústica ou lã de vidro no miolo da parede — uma opção que também instalamos."]
-    ]
-  },
-  {
-    slug: "divisorias-navais",
-    name: "Divisórias Navais",
-    h1: "Divisórias navais em Joinville com material e instalação",
-    detailTitle: "Divisórias Navais em Joinville",
-    metaTitle: "Divisórias navais em Joinville com material e instalação",
-    metaDesc: "Divisórias navais em vidro e alumínio para escritórios e empresas em Joinville. Visual moderno, resistência e instalação profissional. Peça seu orçamento.",
-    heroImg: "images/6.webp",
-    heroAlt: "Divisórias navais em vidro instaladas em escritório corporativo",
-    detailImg: "images/7.webp",
-    detailAlt: "Divisórias navais com estrutura em alumínio e vidro",
-    intro: [
-      "As divisórias navais combinam estrutura em alumínio com fechamento em vidro ou painel, criando ambientes corporativos modernos sem perder a entrada de luz natural entre as salas. É a solução mais usada em escritórios, recepções e salas de reunião que buscam um visual sofisticado.",
-      "A Innovare projeta e instala as divisórias sob medida para o seu espaço, com estrutura resistente e acabamento alinhado à identidade da empresa."
-    ],
-    benefits: [
-      "Visual moderno e profissional para escritórios e recepções",
-      "Estrutura em alumínio resistente, com fechamento em vidro ou painel",
-      "Mantém a luz natural circulando entre os ambientes",
-      "Fácil de reconfigurar se a empresa precisar mudar o layout no futuro"
-    ],
-    faq: [
-      ["Divisória naval é resistente para uso comercial intenso?", "Sim, a estrutura em alumínio é reforçada para suportar o uso diário em ambientes corporativos, com fechamento em vidro temperado ou painel."],
-      ["Dá para reformar o layout do escritório depois de instalado?", "Sim, as divisórias navais são modulares, o que facilita remanejar ou ampliar os ambientes futuramente."],
-      ["Vocês atendem empresas de qualquer porte em Joinville?", "Atendemos desde pequenos escritórios até empresas maiores, sempre com projeto e instalação profissional inclusos."]
-    ]
-  },
-  {
-    slug: "divisorias-eucatex",
-    name: "Divisórias Eucatex",
-    h1: "Divisórias Eucatex em Joinville com material e instalação",
-    detailTitle: "Divisórias Eucatex em Joinville",
-    metaTitle: "Divisórias Eucatex em Joinville com material e instalação",
-    metaDesc: "Divisórias Eucatex para escritórios e comércios em Joinville, com ótimo custo-benefício e instalação profissional. Solicite seu orçamento grátis.",
-    heroImg: "images/old-divisorias.webp",
-    heroAlt: "Divisórias Eucatex instaladas em escritório",
-    detailImg: "images/6.webp",
-    detailAlt: "Ambiente corporativo dividido com painéis",
-    intro: [
-      "As divisórias Eucatex são uma alternativa prática e com ótimo custo-benefício para dividir salas comerciais sem obra pesada. Os painéis criam ambientes bem definidos, com acabamento uniforme e instalação rápida.",
-      "É uma opção muito usada por comércios e pequenas empresas em Joinville que precisam separar ambientes com agilidade e orçamento controlado."
-    ],
-    benefits: [
-      "Ótimo custo-benefício comparado a paredes de alvenaria",
-      "Instalação rápida, sem obra pesada",
-      "Acabamento uniforme, pronto para uso imediato",
-      "Boa opção para dividir salas comerciais e consultórios"
-    ],
-    faq: [
-      ["Divisória Eucatex serve para qualquer tipo de ambiente?", "É mais indicada para ambientes comerciais internos, como salas, consultórios e escritórios que precisam de divisão rápida e econômica."],
-      ["Qual a diferença entre divisória Eucatex e divisória naval?", "A Eucatex tem custo mais baixo e acabamento mais simples; a naval usa alumínio e vidro, com visual mais sofisticado. Ajudamos a escolher a melhor opção pro seu projeto."],
-      ["A instalação suja ou danifica o ambiente existente?", "Não. A instalação é limpa e rápida, sem quebra-quebra, ideal para quem já está com o comércio funcionando."]
-    ]
-  },
-  {
-    slug: "forro-modular",
-    name: "Forro Modular",
-    h1: "Forro modular em Joinville com material e instalação",
-    detailTitle: "Forro Modular em Joinville",
-    metaTitle: "Forro modular em Joinville com material e instalação",
-    metaDesc: "Instalação de forro modular em Joinville para ambientes comerciais e corporativos. Acesso fácil à manutenção elétrica e hidráulica. Orçamento grátis.",
-    heroImg: "images/12.webp",
-    heroAlt: "Forro modular instalado em corredor comercial",
-    detailImg: "images/old-forro-mineral.webp",
-    detailAlt: "Forro modular em grade metálica",
-    intro: [
-      "O forro modular é a escolha ideal para ambientes comerciais e corporativos que precisam de fácil acesso à parte elétrica, hidráulica e de ar-condicionado — as placas se encaixam numa estrutura que pode ser aberta a qualquer momento para manutenção.",
-      "Instalamos forro modular em lojas, escritórios, clínicas e galpões em Joinville, com estrutura nivelada e acabamento uniforme."
-    ],
-    benefits: [
-      "Acesso fácil para manutenção elétrica, hidráulica e de climatização",
-      "Acabamento uniforme e moderno para ambientes comerciais",
-      "Boa absorção acústica, reduzindo o ruído do ambiente",
-      "Instalação rápida sobre estrutura suspensa"
-    ],
-    faq: [
-      ["O forro modular aguenta luminárias embutidas?", "Sim, a estrutura suporta luminárias, difusores de ar-condicionado e outros equipamentos embutidos no forro."],
-      ["É fácil fazer manutenção depois de instalado?", "Sim, essa é uma das maiores vantagens: qualquer placa pode ser removida individualmente para acessar a parte elétrica ou hidráulica."],
-      ["Serve para ambientes residenciais também?", "É mais comum em ambientes comerciais e corporativos, mas pode ser usado em áreas técnicas residenciais, como lavanderias e garagens."]
-    ]
-  },
-  {
-    slug: "forro-eps",
-    name: "Forro EPS",
-    h1: "Forro EPS em Joinville com material e instalação",
-    detailTitle: "Forro em EPS em Joinville",
-    metaTitle: "Forro EPS em Joinville com material e instalação | Innovare",
-    metaDesc: "Instalação de forro em EPS (isopor) em Joinville, com isolamento térmico eficiente e instalação leve e rápida. Peça seu orçamento grátis.",
-    heroImg: "images/13.webp",
-    heroAlt: "Forro em EPS instalado em galpão",
-    detailImg: "images/12.webp",
-    detailAlt: "Forro em placas modulares",
-    intro: [
-      "O forro em EPS (poliestireno expandido) é uma solução leve e com ótimo isolamento térmico, muito usada em galpões, lojas e ambientes comerciais que precisam reduzir o calor interno sem pesar na estrutura do telhado.",
-      "A instalação é rápida e limpa, e a Innovare cuida de todo o processo, do encaixe das placas ao acabamento final."
-    ],
-    benefits: [
-      "Isolamento térmico eficiente, reduzindo o calor interno",
-      "Placas leves, que não sobrecarregam a estrutura do telhado",
-      "Instalação rápida e limpa",
-      "Boa opção para galpões, lojas e áreas comerciais"
-    ],
-    faq: [
-      ["Forro de EPS é resistente ao fogo?", "Trabalhamos com placas próprias para uso comercial; se sua obra exige um índice específico de resistência ao fogo, nos avise antes do orçamento para indicar a placa certa."],
-      ["O EPS ajuda a reduzir o calor dentro do galpão ou loja?", "Sim, esse é o principal benefício do forro em EPS: reduzir a transferência de calor do telhado para o ambiente interno."],
-      ["Qual a diferença entre forro EPS e forro modular?", "O EPS é focado em isolamento térmico com placas leves; o modular é mais indicado quando você precisa de acesso fácil para manutenção. Podemos te ajudar a escolher."]
-    ]
-  },
-  {
-    slug: "forro-mineral",
-    name: "Forro Mineral",
-    h1: "Forro mineral em Joinville com material e instalação",
-    detailTitle: "Forro Mineral em Joinville",
-    metaTitle: "Forro mineral em Joinville com material e instalação",
-    metaDesc: "Instalação de forro mineral em Joinville, com resistência à umidade e ótimo custo-benefício para ambientes comerciais. Orçamento grátis.",
-    heroImg: "images/old-forro-mineral.webp",
-    heroAlt: "Forro mineral instalado em ambiente comercial",
-    detailImg: "images/13.webp",
-    detailAlt: "Detalhe de forro em placas",
-    intro: [
-      "O forro mineral é uma das opções mais usadas em ambientes comerciais por unir bom custo-benefício, resistência à umidade e acabamento uniforme. É uma escolha comum para escritórios, lojas, clínicas e prédios corporativos.",
-      "Fazemos a instalação completa da estrutura e das placas, garantindo nivelamento e acabamento sem falhas."
-    ],
-    benefits: [
-      "Ótimo custo-benefício para grandes áreas comerciais",
-      "Boa resistência à umidade",
-      "Acabamento uniforme e profissional",
-      "Compatível com luminárias e sistemas de ar-condicionado embutidos"
-    ],
-    faq: [
-      ["Forro mineral resiste à umidade de banheiros e cozinhas comerciais?", "Sim, é uma das vantagens desse tipo de placa, mas em áreas de umidade muito alta recomendamos avaliar o ambiente antes para indicar a melhor solução."],
-      ["Qual o prazo médio de instalação?", "Depende do tamanho do ambiente; em geral, ambientes comerciais de porte médio ficam prontos em poucos dias."],
-      ["Dá pra combinar com iluminação embutida?", "Sim, o forro mineral é muito usado justamente por facilitar a instalação de luminárias e difusores de ar embutidos."]
-    ]
-  },
-  {
-    slug: "piso-vinilico",
-    name: "Piso Vinílico",
-    h1: "Piso vinílico em Joinville com material e instalação",
-    detailTitle: "Instalação de Piso Vinílico em Joinville",
-    metaTitle: "Piso vinílico em Joinville com material e instalação",
-    metaDesc: "Instalação de piso vinílico em Joinville para residências e empresas. Conforto, praticidade e fácil manutenção. Orçamento grátis com instalação inclusa.",
-    heroImg: "images/4.webp",
-    heroAlt: "Piso vinílico instalado em residência com escada",
-    detailImg: "images/4.webp",
-    detailAlt: "Detalhe do piso vinílico instalado",
-    intro: [
-      "O piso vinílico é uma das soluções mais procuradas hoje por unir beleza, conforto ao caminhar e manutenção simples — sem o custo e o tempo de obra de um piso tradicional. Fica pronto sobre o contrapiso existente, com acabamento que imita madeira, pedra ou outros materiais.",
-      "Instalamos piso vinílico em residências, escritórios e ambientes comerciais em Joinville, sempre com nivelamento correto da base antes da aplicação."
-    ],
-    benefits: [
-      "Conforto térmico e acústico ao caminhar",
-      "Fácil manutenção e limpeza no dia a dia",
-      "Instalação rápida sobre o piso existente, sem quebra-quebra",
-      "Diversos padrões que imitam madeira, pedra e outros acabamentos"
-    ],
-    faq: [
-      ["Piso vinílico pode ser instalado sobre o piso atual?", "Na maioria dos casos sim, desde que a base esteja nivelada e em boas condições. Avaliamos isso na visita técnica."],
-      ["Piso vinílico é resistente para ambientes com bastante movimento?", "Sim, existem linhas específicas para uso comercial com maior resistência ao tráfego, que indicamos conforme o seu caso."],
-      ["Como é feita a limpeza do piso vinílico?", "A limpeza é simples, com pano úmido e produtos neutros — não precisa de ceras ou tratamentos especiais."]
-    ]
-  },
-  {
-    slug: "piso-laminado",
-    name: "Piso Laminado",
-    h1: "Piso laminado em Joinville com material e instalação",
-    detailTitle: "Instalação de Piso Laminado em Joinville",
-    metaTitle: "Piso laminado em Joinville com material e instalação",
-    metaDesc: "Instalação de piso laminado em Joinville com excelente custo-benefício e acabamento que imita madeira. Orçamento grátis com instalação inclusa.",
-    heroImg: "images/old-piso-laminado-pra-casas.webp",
-    heroAlt: "Piso laminado instalado em sala residencial",
-    detailImg: "images/old-piso-laminado-pra-casas.webp",
-    detailAlt: "Detalhe do piso laminado",
-    intro: [
-      "O piso laminado entrega o visual aconchegante da madeira com um custo mais acessível e instalação mais rápida. É uma escolha muito comum para quartos, salas e escritórios que buscam conforto visual sem abrir mão da praticidade.",
-      "A Innovare cuida de toda a instalação, incluindo o nivelamento da base e o acabamento com rodapés, deixando o ambiente pronto para uso."
-    ],
-    benefits: [
-      "Visual aconchegante que imita madeira natural",
-      "Excelente custo-benefício comparado a pisos de madeira maciça",
-      "Instalação rápida e limpa",
-      "Boa durabilidade em ambientes residenciais e escritórios"
-    ],
-    faq: [
-      ["Piso laminado pode ser usado em qualquer cômodo?", "É mais indicado para ambientes secos, como quartos, salas e escritórios. Para áreas molhadas, indicamos o piso vinílico."],
-      ["Qual a durabilidade do piso laminado?", "Com o uso e manutenção corretos, dura muitos anos — a durabilidade também depende da linha escolhida, que ajudamos a definir no orçamento."],
-      ["É preciso preparar o piso antigo antes de instalar?", "Sim, o contrapiso precisa estar nivelado e seco. Fazemos essa avaliação na visita técnica antes de fechar o orçamento."]
-    ]
-  },
-  {
-    slug: "manta-homogenea",
-    name: "Manta Homogênea",
-    h1: "Manta homogênea hospitalar em Joinville com material e instalação",
-    detailTitle: "Manta Homogênea (Piso Hospitalar) em Joinville",
-    metaTitle: "Manta homogênea hospitalar em Joinville com instalação",
-    metaDesc: "Instalação de manta homogênea (piso hospitalar) em Joinville para hospitais, clínicas e laboratórios. Alta resistência e higiene. Orçamento grátis.",
-    heroImg: "images/old-manta-hospitalar-em-joinville.webp",
-    heroAlt: "Manta homogênea hospitalar instalada em corredor",
-    detailImg: "images/old-manta-hospitalar-em-joinville.webp",
-    detailAlt: "Detalhe da manta homogênea sem emendas",
-    intro: [
-      "A manta homogênea é o piso indicado para ambientes que exigem o máximo de controle sanitário, como hospitais, clínicas e laboratórios. A instalação é feita sem emendas visíveis, facilitando a limpeza e reduzindo o acúmulo de sujeira e bactérias.",
-      "Trabalhamos com fornecimento e instalação completa em unidades de saúde em Joinville e região, seguindo os requisitos técnicos desse tipo de ambiente."
-    ],
-    benefits: [
-      "Alta resistência a produtos de limpeza hospitalar",
-      "Superfície sem emendas, facilitando a higienização",
-      "Indicado para ambientes que exigem controle sanitário rígido",
-      "Boa resistência ao tráfego intenso de equipamentos e macas"
-    ],
-    faq: [
-      ["Manta homogênea serve só para hospitais?", "É mais usada em hospitais, clínicas e laboratórios, mas também pode ser aplicada em outros ambientes que exigem alta higiene, como indústrias alimentícias."],
-      ["A instalação sem emendas é feita como?", "As emendas entre as réguas são soldadas termicamente, criando uma superfície contínua e sem frestas para acúmulo de sujeira."],
-      ["Vocês atendem clínicas de pequeno porte também?", "Sim, atendemos desde consultórios e clínicas pequenas até unidades hospitalares maiores."]
-    ]
-  },
-  {
-    slug: "carpetes-corporativos",
-    name: "Carpetes Corporativos",
-    h1: "Carpetes corporativos em Joinville com material e instalação",
-    detailTitle: "Instalação de Carpetes Corporativos em Joinville",
-    metaTitle: "Carpetes corporativos em Joinville com material e instalação",
-    metaDesc: "Instalação de carpetes corporativos em Joinville para escritórios e empresas. Conforto acústico e térmico com acabamento sofisticado. Orçamento grátis.",
-    heroImg: "images/1.webp",
-    heroAlt: "Carpete corporativo instalado em corredor comercial",
-    detailImg: "images/1.webp",
-    detailAlt: "Detalhe do carpete em placas corporativas",
-    intro: [
-      "O carpete corporativo, instalado em placas, é a escolha de muitas empresas por unir conforto acústico, aparência sofisticada e facilidade de manutenção — inclusive a troca de placas isoladas em caso de dano ou desgaste.",
-      "Instalamos carpete em placas para escritórios, recepções e ambientes corporativos em Joinville, com nivelamento correto do piso antes da aplicação."
-    ],
-    benefits: [
-      "Reduz o ruído de passos e conversas no escritório",
-      "Conforto térmico em relação a pisos frios",
-      "Visual sofisticado para recepções e salas de reunião",
-      "Placas trocáveis individualmente em caso de desgaste"
-    ],
-    faq: [
-      ["Carpete em placas é fácil de trocar quando desgasta?", "Sim, essa é uma das grandes vantagens: dá pra trocar só a placa danificada, sem precisar refazer o piso inteiro."],
-      ["O carpete corporativo é resistente ao tráfego de um escritório?", "Sim, as placas usadas em ambientes corporativos são desenvolvidas para tráfego intenso e uso diário."],
-      ["Como é feita a limpeza do carpete corporativo?", "Aspiração regular e limpeza específica para carpetes resolve a manutenção do dia a dia — orientamos os cuidados após a instalação."]
-    ]
-  },
-  {
-    slug: "persianas",
-    name: "Persianas",
-    h1: "Persianas em Joinville com material e instalação",
-    detailTitle: "Instalação de Persianas em Joinville",
-    metaTitle: "Persianas em Joinville com material e instalação | Innovare",
-    metaDesc: "Instalação de persianas em Joinville para residências e escritórios. Controle de luz e privacidade com estilo. Orçamento grátis.",
-    heroImg: "images/old-persianas.webp",
-    heroAlt: "Persianas instaladas em escritório",
-    detailImg: "images/old-persianas.webp",
-    detailAlt: "Detalhe das persianas instaladas",
-    intro: [
-      "As persianas dão controle sobre a entrada de luz e a privacidade do ambiente, com um acabamento mais elegante que cortinas comuns. É uma solução usada tanto em residências quanto em escritórios que buscam praticidade no dia a dia.",
-      "A Innovare instala persianas sob medida para cada ambiente, com opções de modelos e tecidos que combinam com a decoração do espaço."
-    ],
-    benefits: [
-      "Controle fácil da entrada de luz durante o dia",
-      "Mais privacidade para o ambiente",
-      "Acabamento elegante, combinando com diferentes estilos de decoração",
-      "Fácil manutenção e limpeza"
-    ],
-    faq: [
-      ["Persiana serve pra qualquer tipo de janela?", "Fazemos a medição no local pra indicar o modelo certo conforme o tamanho e o tipo da sua janela."],
-      ["Dá pra instalar persiana em escritório com vidro grande?", "Sim, é uma aplicação bem comum — ajuda a controlar a luz e o calor em salas com fachada de vidro."],
-      ["Qual a diferença entre os modelos de persiana?", "Existem opções em tecido, PVC e outros materiais, com diferentes níveis de bloqueio de luz. Explicamos as opções na hora do orçamento."]
-    ]
-  },
-  {
-    slug: "isolamento-acustico",
-    name: "Isolamento Acústico",
-    h1: "Isolamento acústico em Joinville com material e instalação",
-    detailTitle: "Isolamento Acústico em Joinville",
-    metaTitle: "Isolamento acústico em Joinville com material e instalação",
-    metaDesc: "Instalação de isolamento acústico em Joinville para residências e empresas. Redução de ruído e mais conforto sonoro. Orçamento grátis.",
-    heroImg: "images/old-isolamento-acusto-em-joinville.webp",
-    heroAlt: "Isolamento acústico instalado em parede",
-    detailImg: "images/old-isolamento-acusto-em-joinville.webp",
-    detailAlt: "Detalhe do painel acústico instalado",
-    intro: [
-      "O isolamento acústico reduz a passagem de som entre ambientes, trazendo mais conforto tanto em casa quanto no trabalho. É muito usado em estúdios, salas de reunião, consultórios e ambientes comerciais que precisam de mais privacidade sonora.",
-      "A Innovare instala painéis e sistemas acústicos combinados com drywall ou aplicados diretamente na parede, conforme a necessidade do ambiente."
-    ],
-    benefits: [
-      "Redução do ruído entre ambientes internos",
-      "Mais privacidade sonora para salas de reunião e consultórios",
-      "Pode ser combinado com drywall na mesma obra",
-      "Melhora o conforto acústico interno do ambiente"
-    ],
-    faq: [
-      ["Isolamento acústico bloqueia o som totalmente?", "Reduz significativamente a passagem de som, mas o nível de bloqueio depende do material e da espessura escolhidos — avaliamos isso conforme sua necessidade."],
-      ["Dá pra fazer isolamento acústico numa reforma já pronta?", "Sim, existem soluções que podem ser aplicadas sem precisar quebrar a parede existente."],
-      ["Isolamento acústico serve pra home studio ou sala de música?", "Sim, é uma das aplicações mais comuns — ajudamos a definir o melhor sistema pro seu caso."]
-    ]
-  },
-  {
-    slug: "gesso-rodapes",
-    name: "Gesso & Rodapés",
-    h1: "Gesso e rodapés em Joinville com material e instalação",
-    detailTitle: "Instalação de Gesso e Rodapés em Joinville",
-    metaTitle: "Gesso e rodapés em Joinville com material e instalação",
-    metaDesc: "Instalação de sancas de gesso, molduras e rodapés em Joinville, valorizando o acabamento do ambiente. Orçamento grátis com instalação inclusa.",
-    heroImg: "images/old-gesso-em-joinville.webp",
-    heroAlt: "Sanca de gesso com iluminação embutida",
-    detailImg: "images/old-gesso-em-joinville.webp",
-    detailAlt: "Detalhe do acabamento em gesso",
-    intro: [
-      "Sancas, molduras e rodapés são detalhes que fazem toda diferença no acabamento final de um ambiente — valorizam a iluminação, escondem fiações e dão um aspecto mais acabado e sofisticado para o espaço.",
-      "A Innovare instala gesso e rodapés em residências e ambientes comerciais em Joinville, sempre alinhando o acabamento ao restante do projeto."
-    ],
-    benefits: [
-      "Valoriza a iluminação embutida do ambiente",
-      "Esconde fiações e imperfeições no encontro parede-teto",
-      "Acabamento mais sofisticado para o projeto",
-      "Combina com drywall, forro e outros acabamentos"
-    ],
-    faq: [
-      ["Sanca de gesso combina com forro de drywall?", "Sim, é uma combinação muito comum — instalamos os dois juntos como parte do mesmo projeto."],
-      ["Rodapé de gesso é mais caro que o de madeira ou PVC?", "O custo varia conforme o modelo escolhido. Apresentamos as opções e valores no orçamento, conforme o que combina com seu projeto."],
-      ["Dá pra fazer sanca com iluminação embutida?", "Sim, é uma das aplicações mais pedidas — já deixamos o espaço preparado para a fiação da iluminação."]
-    ]
-  },
-  {
-    slug: "placas-cimenticias",
-    name: "Placas Cimentícias",
-    h1: "Placas cimentícias em Joinville com material e instalação",
-    detailTitle: "Instalação de Placas Cimentícias em Joinville",
-    metaTitle: "Placas cimentícias em Joinville com material e instalação",
-    metaDesc: "Instalação de placas cimentícias em Joinville para fachadas e áreas internas ou externas. Solução resistente e versátil. Orçamento grátis.",
-    heroImg: "images/old-placas-cimenticias-em-joinville.webp",
-    heroAlt: "Fachada revestida com placas cimentícias",
-    detailImg: "images/old-placas-cimenticias-em-joinville.webp",
-    detailAlt: "Detalhe da fachada em placas cimentícias",
-    intro: [
-      "As placas cimentícias são uma solução resistente e versátil para revestir fachadas e paredes internas ou externas, com um visual moderno e boa resistência à umidade e às condições externas.",
-      "A Innovare instala placas cimentícias em residências e empreendimentos comerciais em Joinville, com estrutura de fixação adequada para cada tipo de aplicação."
-    ],
-    benefits: [
-      "Boa resistência à umidade e às condições externas",
-      "Visual moderno para fachadas residenciais e comerciais",
-      "Pode ser usada em áreas internas e externas",
-      "Baixa manutenção ao longo do tempo"
-    ],
-    faq: [
-      ["Placa cimentícia serve para fachada externa?", "Sim, é uma das aplicações mais comuns, por resistir bem à umidade e às variações de temperatura."],
-      ["Dá pra usar placa cimentícia em área interna também?", "Sim, funciona bem como revestimento de parede interna com visual diferenciado, tipo industrial ou moderno."],
-      ["Qual a manutenção necessária depois de instalada?", "É bem baixa — não exige pintura frequente nem tratamentos especiais, apenas limpeza ocasional."]
-    ]
-  }
-];
+const { SERVICES } = require("./services-data");
 
-// Perguntas extras por serviço: 1) "preço" (primeira, abre aberta) e 2) variações
-// de busca (sinônimos) que as pessoas digitam. Entram no FAQ visível e no schema.
-const PRECO_FIM = "Para saber quanto custa, enviamos o orçamento grátis e sem compromisso. Como a instalação já está inclusa, o valor apresentado considera material e instalação juntos.";
-const FAQ_EXTRA = {
-  "drywall": {
-    preco: ["Qual o preço do drywall em Joinville?", "O preço depende da metragem (m²), do tipo de placa e da estrutura da parede ou do forro. " + PRECO_FIM],
-    extras: [
-      ["Drywall e gesso acartonado são a mesma coisa?", "Sim. Drywall é o nome em inglês do gesso acartonado, o sistema de placas sobre estrutura metálica usado para paredes, forros e divisórias."],
-      ["O que dá para fazer com drywall?", "Além da parede de drywall, fazemos forro de drywall, sancas, nichos e divisória de drywall para escritórios, lojas e residências."]
-    ]
-  },
-  "divisorias-navais": {
-    preco: ["Qual o preço da divisória naval em Joinville?", "O preço depende do tamanho do ambiente, do tipo de fechamento (vidro ou painel) e do acabamento. " + PRECO_FIM],
-    extras: [["Divisória naval é o mesmo que divisória de vidro?", "A divisória naval é o sistema com estrutura de alumínio. O fechamento pode ser em vidro (divisória de vidro) ou em painel, e é a opção mais usada como divisória corporativa em escritórios."]]
-  },
-  "divisorias-eucatex": {
-    preco: ["Qual o preço da divisória Eucatex em Joinville?", "O preço depende da metragem, do tipo de painel e da quantidade de portas. " + PRECO_FIM],
-    extras: [["A divisória Eucatex serve para escritório e sala comercial?", "Sim. É muito usada como divisória para escritório, consultório e sala comercial, quando se quer dividir o espaço com rapidez e bom custo-benefício."]]
-  },
-  "forro-modular": {
-    preco: ["Qual o preço do forro modular em Joinville?", "O preço depende da metragem (m²), do tipo de placa e da iluminação embutida. " + PRECO_FIM],
-    extras: [["Forro modular e forro removível são a mesma coisa?", "Sim. Também chamado de forro removível, ele usa placas que se encaixam numa estrutura e podem ser retiradas para manutenção. Os módulos mais comuns têm cerca de 60x60 cm (forro 60x60); a medida exata depende do material escolhido."]]
-  },
-  "forro-eps": {
-    preco: ["Qual o preço do forro de EPS em Joinville?", "O preço depende da metragem (m²) e da espessura da placa. " + PRECO_FIM],
-    extras: [["Forro de EPS é o mesmo que forro de isopor?", "Sim. EPS é o nome técnico do isopor. O forro de isopor (EPS) funciona como forro térmico, reduzindo o calor que vem do telhado para dentro do ambiente."]]
-  },
-  "forro-mineral": {
-    preco: ["Qual o preço do forro mineral em Joinville?", "O preço depende da metragem (m²) e do tipo de placa escolhido. " + PRECO_FIM],
-    extras: [["O forro mineral também é um forro acústico?", "Ele ajuda na absorção do som, por isso é bastante usado como forro acústico em escritórios e salas comerciais. Os módulos mais comuns têm cerca de 60x60 cm (forro mineral 60x60)."]]
-  },
-  "piso-vinilico": {
-    preco: ["Qual o preço do piso vinílico em Joinville?", "O preço depende da metragem (m²), da linha escolhida e das condições do contrapiso. " + PRECO_FIM],
-    extras: [["Vocês fazem a colocação do piso vinílico?", "Sim. A colocação (instalação) está sempre inclusa: nossa equipe prepara a base, instala o piso e faz o acabamento, sem você precisar contratar outro profissional."]]
-  },
-  "piso-laminado": {
-    preco: ["Qual o preço do piso laminado em Joinville?", "O preço depende da metragem (m²), da linha escolhida e das condições do contrapiso. " + PRECO_FIM],
-    extras: [["Vocês fazem a colocação do piso laminado?", "Sim. A colocação (instalação) está sempre inclusa, com nivelamento da base e acabamento com rodapés, deixando o ambiente pronto para uso."]]
-  },
-  "manta-homogenea": {
-    preco: ["Qual o preço da manta homogênea em Joinville?", "O preço depende da metragem (m²), da espessura da manta e do tipo de ambiente. " + PRECO_FIM],
-    extras: [["A manta homogênea serve como piso para clínica e consultório?", "Sim. Além de hospital, a manta homogênea é indicada como piso para clínica, consultório e laboratório, onde a limpeza e a higiene fazem diferença."]]
-  },
-  "carpetes-corporativos": {
-    preco: ["Qual o preço do carpete corporativo em Joinville?", "O preço depende da metragem (m²) e da linha de placas escolhida. " + PRECO_FIM],
-    extras: [["Carpete modular e carpete em placas são a mesma coisa?", "Sim. O carpete modular é o carpete em placas, a opção mais usada como carpete para escritório: se uma placa desgasta ou mancha, dá para trocar só ela."]]
-  },
-  "persianas": {
-    preco: ["Qual o preço da persiana em Joinville?", "O preço depende do tamanho de cada janela, do modelo e do tecido. " + PRECO_FIM],
-    extras: [["Quais modelos de persiana vocês instalam?", "Instalamos persianas sob medida, como persiana rolô e persiana double vision, para residências e escritórios. Apresentamos as opções de modelo e tecido no orçamento."]]
-  },
-  "isolamento-acustico": {
-    preco: ["Qual o preço do isolamento acústico em Joinville?", "O preço depende da área tratada e do sistema indicado para o seu caso. " + PRECO_FIM],
-    extras: [["Qual a diferença entre isolamento acústico e tratamento acústico?", "O isolamento acústico reduz o som que passa de um ambiente para o outro. O tratamento acústico, com painel acústico, melhora o som dentro do ambiente, reduzindo o eco. Na visita técnica indicamos o que faz sentido para o seu caso."]]
-  },
-  "gesso-rodapes": {
-    preco: ["Qual o preço do gesso e do rodapé em Joinville?", "O preço depende do projeto (sanca, moldura ou forro), da metragem e do acabamento. " + PRECO_FIM],
-    extras: [["Vocês fazem forro de gesso e instalação de rodapé?", "Trabalhamos com gesso em forro rebaixado, sancas e molduras, e também com a instalação de rodapé, deixando o acabamento do ambiente completo."]]
-  },
-  "placas-cimenticias": {
-    preco: ["Qual o preço da placa cimentícia em Joinville?", "O preço depende da área revestida, da espessura da placa e do sistema de fixação. " + PRECO_FIM],
-    extras: [["A placa cimentícia serve como revestimento para parede externa?", "Sim. O revestimento cimentício é muito usado em parede externa e fachada, por resistir bem à umidade e às variações do tempo."]]
-  }
-};
+// Título da aba/Google: o H1 + " | Innovare" quando couber em 60 caracteres; senão só o H1;
+// se nem o H1 couber, usa a variante curta definida no serviço (titleShort).
+const LIMITE_TITULO = 60;
+const MARCA = " | Innovare";
 SERVICES.forEach(s => {
-  const x = FAQ_EXTRA[s.slug];
-  if (x) s.faq = [x.preco, ...s.faq, ...x.extras];
+  const comMarca = s.h1 + MARCA;
+  s.metaTitle = comMarca.length <= LIMITE_TITULO ? comMarca
+    : s.h1.length <= LIMITE_TITULO ? s.h1
+    : (s.titleShort || s.h1);
 });
 
-const SELECT_VALUE = {
-  "drywall": "Drywall",
-  "divisorias-navais": "Divisórias Navais",
-  "divisorias-eucatex": "Divisórias Eucatex",
-  "forro-modular": "Forro Modular / EPS / Mineral",
-  "forro-eps": "Forro Modular / EPS / Mineral",
-  "forro-mineral": "Forro Modular / EPS / Mineral",
-  "piso-vinilico": "Piso Vinílico",
-  "piso-laminado": "Piso Laminado",
-  "manta-homogenea": "Manta Homogênea",
-  "carpetes-corporativos": "Carpete Corporativo",
-  "persianas": "Persianas",
-  "isolamento-acustico": "Isolamento Acústico",
-  "gesso-rodapes": "Gesso / Rodapés",
-  "placas-cimenticias": "Placas Cimentícias"
-};
+const OUTRO = "Outro / Não sei ainda";
 
-const SELECT_OPTIONS = [
-  "Drywall", "Divisórias Navais", "Divisórias Eucatex", "Forro Modular / EPS / Mineral",
-  "Piso Vinílico", "Piso Laminado", "Manta Homogênea", "Carpete Corporativo",
-  "Persianas", "Isolamento Acústico", "Gesso / Rodapés", "Placas Cimentícias", "Outro / Não sei ainda"
-];
+function selectOptionsHtml(selectedLabel, indent) {
+  const labels = SERVICES.map(s => s.selectLabel).concat(OUTRO);
+  const opts = labels.map(l => `<option${l === selectedLabel ? " selected" : ""}>${esc(l)}</option>`).join("\n" + indent);
+  return `<option value="" disabled${selectedLabel ? "" : " selected"}>Selecione um serviço</option>\n${indent}${opts}`;
+}
 
 function serviceSelectHtml(service) {
-  const match = SELECT_VALUE[service.slug];
-  const opts = SELECT_OPTIONS.map(opt =>
-    `<option${opt === match ? " selected" : ""}>${opt}</option>`
-  ).join("\n          ");
-  return `<option value="" disabled${match ? "" : " selected"}>Selecione um serviço</option>\n          ${opts}`;
+  return selectOptionsHtml(service.selectLabel, "          ");
 }
 
 function esc(str) {
@@ -510,6 +53,7 @@ function serviceJsonLd(service) {
       "@type": "HomeAndConstructionBusiness",
       name: "Innovare Decorações & Revestimentos",
       telephone: "+55 47 98929-2335",
+      email: "innovare@innovaredecoracoes.com.br",
       address: {
         "@type": "PostalAddress",
         streetAddress: "R. Minas Gerais - Nova Brasília",
@@ -589,7 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../css/styles.css?v=8">
+<link rel="stylesheet" href="../css/styles.css?v=16">
 
 <script type="application/ld+json">
 ${serviceJsonLd(service)}
@@ -612,6 +156,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
 
     <nav class="header__nav" id="nav">
+      <a href="../index.html#sobre">Sobre</a>
       <a href="../index.html#servicos">Serviços</a>
       <a href="../index.html#portfolio">Portfólio</a>
       <a href="../index.html#diferenciais">Diferenciais</a>
@@ -634,6 +179,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </header>
 
+<main>
 <section class="hero hero--service">
   <div class="hero__media">
     <img src="../${service.heroImg}" alt="${esc(service.heroAlt)}" loading="eager">
@@ -672,7 +218,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
       <a href="#orcamento" class="btn btn--primary btn--lg reveal" data-track="cta_detail">Solicitar Orçamento Grátis</a>
     </div>
-  </div>
+  </div>${service.topics ? `
+  <div class="container service-topics"${(service.topicsCols || service.topics.length) !== 3 ? ` style="--cols:${service.topicsCols || service.topics.length}"` : ""}>
+    ${service.topics.map(t => `<div class="service-topic${t.img ? " service-topic--img" : ""} reveal">${t.img ? `
+      <img class="service-topic__img" src="../${t.img}" alt="${esc(t.alt || t.title)}" loading="lazy">` : ""}
+      <h3>${esc(t.title)}</h3>
+      <p>${esc(t.text)}</p>
+    </div>`).join("\n    ")}
+  </div>` : ""}
 </section>
 
 <section id="orcamento" class="section orcamento">
@@ -751,25 +304,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+</main>
+
 <footer class="footer" id="contato">
   <div class="container footer__grid">
     <div>
       <img src="../images/logo.png" alt="Innovare Decorações & Revestimentos" width="64" height="64" class="footer__logo">
-      <p>Especialistas em revestimentos e decoração com instalação profissional inclusa em Joinville e região.</p>
+      <p>Especialistas em revestimentos e decoração, com fornecimento e instalação profissional em Joinville e região.</p>
       <a href="https://www.instagram.com/innovaredecoracoes/" target="_blank" rel="noopener" class="footer__social">
         <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2c2.7 0 3.1 0 4.1.1 1.1 0 1.8.2 2.5.5.7.3 1.2.6 1.8 1.2.6.6.9 1.1 1.2 1.8.3.7.5 1.4.5 2.5.1 1 .1 1.4.1 4.1s0 3.1-.1 4.1c0 1.1-.2 1.8-.5 2.5-.3.7-.6 1.2-1.2 1.8-.6.6-1.1.9-1.8 1.2-.7.3-1.4.5-2.5.5-1 .1-1.4.1-4.1.1s-3.1 0-4.1-.1c-1.1 0-1.8-.2-2.5-.5-.7-.3-1.2-.6-1.8-1.2-.6-.6-.9-1.1-1.2-1.8-.3-.7-.5-1.4-.5-2.5C2 15.1 2 14.7 2 12s0-3.1.1-4.1c0-1.1.2-1.8.5-2.5.3-.7.6-1.2 1.2-1.8.6-.6 1.1-.9 1.8-1.2.7-.3 1.4-.5 2.5-.5C8.9 2 9.3 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm0 8.2a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm5.2-8.4a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4z"/></svg>
         @innovaredecoracoes
       </a>
     </div>
     <div>
-      <h4>Contato</h4>
+      <h3>Contato</h3>
       <p><a data-conversao="ligacao" href="tel:+5547989292335">(47) 98929-2335</a></p>
+      <div class="footer__contact-row">
+        <a data-conversao="whatsapp" href="${WA_LINK}" target="_blank" rel="noopener" class="btn btn--primary btn--sm" data-track="whatsapp_footer">WhatsApp</a>
+        <a href="mailto:innovare@innovaredecoracoes.com.br">innovare@innovaredecoracoes.com.br</a>
+      </div>
       <p>R. Minas Gerais - Nova Brasília,<br>Joinville - SC, 89214-600</p>
       <p>Horário de Atendimento<br>Seg à Sex - 07h30 às 18h00<br>Sáb - 08h00 às 11h30</p>
     </div>
     <div>
-      <h4>Serviços</h4>
-      <p>Drywall · Divisórias · Forros<br>Piso Vinílico · Piso Laminado<br>Carpetes · Persianas · Gesso</p>
+      <h3>Serviços</h3>
+      <p>Drywall · Divisórias<br>Forros · Pisos<br>Carpetes · Persianas<br>Cortinas · Acústica<br>Mobiliário</p>
     </div>
     <div class="footer__map">
       <iframe
@@ -783,11 +342,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<aside aria-label="Atalho do WhatsApp">
 <a data-conversao="whatsapp" href="${WA_LINK}" target="_blank" rel="noopener" class="float-whatsapp" data-track="whatsapp_float" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.7 14.4 3.2 13 3.2 12c0-4.8 3.9-8.7 8.8-8.7s8.8 3.9 8.8 8.7-3.9 8.7-8.8 8.7zm4.8-6.6c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 8.9 9.5 7.6 9.3 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.3 0-.1-.2-.2-.4-.3z"/></svg>
 </a>
+</aside>
 
-<div class="mobile-bar">
+<nav class="mobile-bar" aria-label="Contato rápido">
   <a data-conversao="ligacao" href="tel:+5547989292335" class="mobile-bar__btn mobile-bar__btn--call" data-track="call_mobilebar">
     <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
     Ligar
@@ -796,9 +357,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
     WhatsApp
   </a>
-</div>
+</nav>
 
-<script src="../js/main.js?v=3"></script>
+<script src="../js/main.js?v=4"></script>
 </body>
 </html>
 `;
@@ -812,5 +373,47 @@ SERVICES.forEach(service => {
   fs.writeFileSync(path.join(outDir, `${service.slug}.html`), html, "utf8");
   console.log("Gerado:", service.slug + ".html");
 });
+
+// Remove páginas e imagens de compartilhamento de serviços que não existem mais.
+const slugs = new Set(SERVICES.map(s => s.slug));
+fs.readdirSync(outDir).filter(f => f.endsWith(".html") && !slugs.has(f.replace(/\.html$/, ""))).forEach(f => {
+  fs.unlinkSync(path.join(outDir, f));
+  console.log("Removido (serviço descontinuado):", "servicos/" + f);
+});
+const ogDir = path.join(__dirname, "..", "images", "og");
+if (fs.existsSync(ogDir)) {
+  fs.readdirSync(ogDir).filter(f => f.endsWith(".jpg")).forEach(f => {
+    const nome = f.replace(/\.jpg$/, "");
+    if (nome !== "home" && !slugs.has(nome)) { fs.unlinkSync(path.join(ogDir, f)); console.log("Removido:", "images/og/" + f); }
+  });
+}
+
+// Home: cards de serviço e opções do formulário saem da mesma lista de serviços.
+const indexFile = path.join(__dirname, "..", "index.html");
+function entreMarcadores(html, nome, conteudo) {
+  const ini = `<!-- AUTO:${nome}:START -->`, fim = `<!-- AUTO:${nome}:END -->`;
+  const a = html.indexOf(ini), b = html.indexOf(fim);
+  if (a < 0 || b < 0) throw new Error(`Marcadores AUTO:${nome} não encontrados no index.html`);
+  return html.slice(0, a + ini.length) + "\n" + conteudo + "\n" + html.slice(b);
+}
+const cards = SERVICES.map(s => `      <div class="service-card reveal" id="${s.anchor || "servico-" + s.slug}">
+        <div class="service-card__photo"><img src="${s.card.img}" alt="${esc(s.card.alt)}" loading="lazy"></div>
+        <div class="service-card__icon"><svg viewBox="0 0 24 24">${s.card.icon}</svg></div>
+        <h3>${esc(s.name)}</h3>
+        <p>${esc(s.card.desc)}</p>
+        <a href="servicos/${s.slug}.html" class="service-card__link">Saiba mais →</a>
+      </div>`).join("\n");
+let home = fs.readFileSync(indexFile, "utf8");
+home = entreMarcadores(home, "services-grid", cards);
+home = entreMarcadores(home, "service-options", "          " + selectOptionsHtml(null, "          "));
+fs.writeFileSync(indexFile, home, "utf8");
+console.log("Home atualizada: " + SERVICES.length + " cards e opções do formulário");
+
+// Sitemap
+const urls = [`  <url><loc>${SITE_URL}/</loc><priority>1.0</priority></url>`]
+  .concat(SERVICES.map(s => `  <url><loc>${SITE_URL}/servicos/${s.slug}.html</loc><priority>0.8</priority></url>`));
+fs.writeFileSync(path.join(__dirname, "..", "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`, "utf8");
+console.log("sitemap.xml atualizado com " + urls.length + " URLs");
 
 console.log(`\n${SERVICES.length} páginas geradas em /servicos`);
