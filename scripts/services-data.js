@@ -25,7 +25,48 @@ const SERVICES = [
     name: "Drywall",
     selectLabel: "Drywall",
     h1: "Drywall em Joinville com Material e Instalação",
-    heroSub: "Paredes, forros e divisórias prontos para pintar, com equipe própria do início ao acabamento.",
+    heroSub: "Material e instalação com uma só empresa, prazo combinado antes de começar e orçamento definido conforme o escopo contratado. Alterações de escopo somente mediante aprovação do cliente.",
+    heroBullets: [
+      "Execução ágil, com menos sujeira e entulho que a alvenaria convencional.",
+      "Acabamento liso, preparado para as etapas de pintura conforme o escopo contratado.",
+      "Possibilidade de isolamento térmico e acústico conforme a composição do sistema."
+    ],
+    // Avaliação do Google (dados confirmados pela Innovare). Quando houver o link oficial do perfil, preencher `url`.
+    googleReview: { nota: "5,0", total: 3, url: null },
+    landing: true,
+    pains: {
+      title: "Sua obra não pode parar por falta de drywall.",
+      text: "Obra parada esperando o gesso, instalador que desaparece, atraso que compromete outras etapas e orçamento que vira aditivo são problemas que ninguém quer enfrentar. Na Innovare, você contrata material e instalação com uma única empresa, com escopo definido, prazo combinado e acompanhamento da execução.",
+      points: [
+        { title: "Prazo e planejamento", text: "Prazo combinado antes de começar e acompanhamento da execução." },
+        { title: "Escopo e orçamento claros", text: "Orçamento definido conforme o escopo contratado. Alterações de escopo somente mediante aprovação do cliente." },
+        { title: "Fornecimento e instalação com uma única empresa", text: "Material e mão de obra em uma única contratação." }
+      ],
+      cta: "Solicitar orçamento grátis"
+    },
+    safety: {
+      title: "Segurança em cada etapa da sua obra.",
+      items: [
+        "Emissão de nota fiscal.",
+        "1 ano de garantia na instalação de drywall, conforme as condições contratuais e sem prejuízo das garantias legais.",
+        "Suporte técnico de engenharia civil e elétrica por profissionais parceiros.",
+        "Responsabilidade técnica e ART quando aplicável, conforme o projeto e escopo contratado.",
+        "Prazo de execução definido previamente, conforme metragem e complexidade, formalizado na proposta ou contrato.",
+        "Material e mão de obra em uma única contratação."
+      ]
+    },
+    obras: {
+      title: "Conheça algumas de nossas obras executadas.",
+      sub: "Projetos de drywall e soluções construtivas para diferentes ambientes comerciais, corporativos e institucionais.",
+      nota: "As fotos mostram etapas de execução das obras.",
+      cta: "Solicite um orçamento para sua obra",
+      itens: [
+        { img: "images/portfolio/drywall-transmagna", w: 864, h: 1536, nome: "Transmagna Transportes", desc: "Divisórias em drywall.", alt: "Divisórias em drywall em execução na obra da Transmagna Transportes, com aberturas para portas e janela" },
+        { img: "images/portfolio/drywall-clinica", w: 960, h: 1280, nome: "Clínica", desc: "Paredes e divisão de ambientes em drywall.", alt: "Paredes de drywall dividindo ambientes em obra de clínica, com placas e massa aplicadas" },
+        { img: "images/portfolio/drywall-udesc", w: 960, h: 1280, nome: "UDESC", desc: "Divisórias em drywall.", alt: "Divisória em drywall com abertura para nicho na obra da UDESC, em ambiente com teto de concreto aparente" },
+        { img: "images/portfolio/drywall-recreativa-schulz", w: 864, h: 1536, nome: "Recreativa Schulz", desc: "Divisórias em drywall e estrutura de forro modular.", alt: "Divisórias em drywall e estrutura metálica de forro modular sob o telhado de madeira na Recreativa Schulz" }
+      ]
+    },
     detailTitle: "Paredes, forros e divisórias em drywall",
     topics: [
       { title: "Parede de drywall", text: "Construímos paredes de drywall para criar novos ambientes, fechar vãos ou dividir salas, quartos e escritórios. A parede fica pronta em poucos dias, sem quebra-quebra e com acabamento pronto para pintar. Material e instalação inclusos, em Joinville e região." },
@@ -39,8 +80,8 @@ const SERVICES = [
     detailAlt: "Corredor com paredes e forro em drywall",
     card: { img: "images/servicos/drywall-card.webp", alt: "Corredor com paredes e forro em drywall", desc: "Paredes e ambientes planejados com rapidez de execução e acabamento moderno.", icon: ICON.drywall },
     intro: [
-      "O drywall é hoje uma das soluções mais usadas para criar e dividir ambientes com rapidez, sem a sujeira e o tempo de uma obra em alvenaria tradicional. Na Innovare, o fornecimento e a instalação são feitos por equipe própria, do início ao acabamento — nunca vendemos só o material.",
-      "Trabalhamos com drywall em residências, escritórios, lojas, clínicas e ambientes corporativos em Joinville e região, sempre com estrutura reforçada e acabamento pronto para pintura."
+      "O drywall é hoje uma das soluções mais usadas para criar e dividir ambientes com rapidez, sem a sujeira e o tempo de uma obra em alvenaria tradicional. Na Innovare, o fornecimento e a instalação são feitos por mão de obra especializada, do início ao acabamento — nunca vendemos só o material.",
+      "Trabalhamos com drywall em residências, escritórios, lojas, clínicas e ambientes corporativos em Joinville e região, sempre com estrutura reforçada e acabamento pronto para pintura. Contamos ainda com suporte de profissionais parceiros de engenharia civil e elétrica, conforme o projeto."
     ],
     benefits: [
       "Execução rápida, com menos sujeira e entulho que a alvenaria",
@@ -50,9 +91,15 @@ const SERVICES = [
     ],
     faq: [
       ["Qual o preço do drywall em Joinville?", "O preço depende da metragem (m²), do tipo de placa e da estrutura da parede ou do forro. " + PRECO_FIM],
-      ["Quanto tempo leva para instalar uma parede de drywall?", "Depende do tamanho do ambiente, mas costuma ser bem mais rápido que uma parede de alvenaria — muitos projetos ficam prontos em poucos dias."],
+      ["Qual é o prazo de execução?", "Depende da metragem e da complexidade. O prazo é definido antes do início, conforme a proposta."],
+      ["Vocês fornecem o material e realizam a instalação?", "Sim, trabalhamos com fornecimento e instalação de drywall."],
+      ["A instalação tem garantia?", "Sim, oferecemos 1 ano de garantia na instalação, conforme condições contratuais e garantias legais."],
+      ["Vocês emitem nota fiscal?", "Sim."],
+      ["Possuem responsável técnico?", "Contamos com suporte de profissionais de engenharia civil e elétrica e ART conforme a necessidade e o escopo do projeto."],
+      ["Atendem obras residenciais, comerciais e corporativas?", "Sim, em Joinville e região, conforme o projeto."],
+      ["Como solicitar um orçamento?", "Entre em contato pelo WhatsApp e envie as medidas, fotos ou projeto e o local da obra para avaliação."],
       ["Parede de drywall aguenta pendurar TV e prateleira?", "Sim. A fixação é feita nos montantes da estrutura metálica interna, e nossa equipe já planeja esses pontos de reforço durante a instalação."],
-      ["Drywall isola bem o som entre os ambientes?", "Isola, principalmente quando combinado com manta acústica ou lã de vidro no miolo da parede — uma opção que também fornecemos e instalamos."],
+      ["Drywall isola bem o som entre os ambientes?", "Sim, o sistema pode receber isolamento adequado às necessidades de cada ambiente, principalmente quando combinado com manta acústica ou lã de vidro no miolo da parede — uma opção que também fornecemos e instalamos."],
       ["Drywall e gesso acartonado são a mesma coisa?", "Sim. Drywall é o nome em inglês do gesso acartonado, o sistema de placas sobre estrutura metálica usado para paredes, forros e divisórias."],
       ["O que dá para fazer com drywall?", "Além da parede de drywall, fazemos forro de drywall, sancas, nichos e divisória de drywall para escritórios, lojas e residências."]
     ]

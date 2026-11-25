@@ -78,6 +78,71 @@ function relatedLinks(current) {
     .join("\n        ");
 }
 
+const CHECK = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.3 5.3l-11 11-5.6-5.6 1.4-1.4 4.2 4.2 9.6-9.6z"/></svg>';
+
+// Seções extras da página "landing" (hoje só o drywall): dores, segurança, obras executadas.
+function painsHtml(service) {
+  const p = service.pains;
+  return `<section class="section pains">
+  <div class="container">
+    <h2 class="section__title reveal">${esc(p.title)}</h2>
+    <p class="pains__text reveal">${esc(p.text)}</p>
+    <div class="service-topics pains__points">
+      ${p.points.map(t => `<div class="service-topic reveal">
+        <h3>${esc(t.title)}</h3>
+        <p>${esc(t.text)}</p>
+      </div>`).join("\n      ")}
+    </div>
+    <a href="#orcamento" class="btn btn--primary btn--lg reveal" data-track="cta_pains">${esc(p.cta)}</a>
+  </div>
+</section>
+
+`;
+}
+
+function safetyHtml(service) {
+  const sf = service.safety;
+  return `<section class="section safety">
+  <div class="container">
+    <h2 class="section__title reveal">${esc(sf.title)}</h2>
+    <ul class="safety__list">
+      ${sf.items.map(i => `<li class="reveal">${CHECK} <span>${esc(i)}</span></li>`).join("\n      ")}
+    </ul>
+  </div>
+</section>
+
+`;
+}
+
+function obrasHtml(service) {
+  const o = service.obras;
+  return `<section class="section obras">
+  <div class="container">
+    <h2 class="section__title reveal">${esc(o.title)}</h2>
+    <p class="section__sub reveal">${esc(o.sub)}</p>
+    <div class="obras__grid">
+      ${o.itens.map(i => `<figure class="obra-card reveal">
+        <div class="obra-card__media"><img src="../${i.img}-lg.webp" srcset="../${i.img}-sm.webp 480w, ../${i.img}-lg.webp ${i.w}w" sizes="(max-width: 640px) 90vw, (max-width: 980px) 45vw, 25vw" width="${i.w}" height="${i.h}" alt="${esc(i.alt)}" loading="lazy"></div>
+        <figcaption><h3>${esc(i.nome)}</h3><p>${esc(i.desc)}</p></figcaption>
+      </figure>`).join("\n      ")}
+    </div>
+    ${o.nota ? `<p class="obras__note reveal">${esc(o.nota)}</p>` : ""}
+    <a href="#orcamento" class="btn btn--primary btn--lg reveal" data-track="cta_obras">${esc(o.cta)}</a>
+  </div>
+</section>
+
+`;
+}
+
+// Ordem da página landing: topo, dores, serviços/equipe, chão ao teto, segurança, obras, formulário, dúvidas, CTA final.
+function recompor(html, service) {
+  const pos = k => { const i = html.indexOf(k); if (i < 0) throw new Error("Seção não encontrada: " + k); return i; };
+  const iForm = pos('<section id="orcamento"'), iFaq = pos('<section class="section faq">'),
+        iRel = pos('<section class="related-services">'), iCta = pos('<section class="cta-final">');
+  return html.slice(0, iForm) + html.slice(iRel, iCta) + safetyHtml(service) + obrasHtml(service)
+    + html.slice(iForm, iFaq) + html.slice(iFaq, iRel) + html.slice(iCta);
+}
+
 function page(service) {
   return `<!DOCTYPE html>
 <html lang="pt-BR">
@@ -133,7 +198,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../css/styles.css?v=17">
+<link rel="stylesheet" href="../css/styles.css?v=${service.landing ? 19 : 17}">
 
 <script type="application/ld+json">
 ${serviceJsonLd(service)}
@@ -193,18 +258,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
     <p class="eyebrow reveal">Innovare Decorações &amp; Revestimentos · Joinville - SC</p>
     <h1 class="reveal">${esc(service.h1)}</h1>${service.heroSub ? `
-    <p class="hero__sub reveal">${esc(service.heroSub)}</p>` : ""}
+    <p class="hero__sub reveal">${esc(service.heroSub)}</p>` : ""}${service.heroBullets ? `
+    <ul class="hero__bullets reveal">
+      ${service.heroBullets.map(b => `<li>${CHECK} <span>${esc(b)}</span></li>`).join("\n      ")}
+    </ul>` : ""}
     <div class="hero__cta reveal">
       <a href="#orcamento" class="btn btn--primary btn--lg" data-track="cta_hero_form">Quero meu Orçamento Grátis</a>
       <a data-conversao="whatsapp" href="${WA_LINK}" target="_blank" rel="noopener" class="btn btn--outline btn--lg" data-track="cta_hero_whatsapp">
         <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.9-1.4c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.7 14.4 3.2 13 3.2 12c0-4.8 3.9-8.7 8.8-8.7s8.8 3.9 8.8 8.7-3.9 8.7-8.8 8.7zm4.8-6.6c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 8.9 9.5 7.6 9.3 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.3 0-.1-.2-.2-.4-.3z"/></svg>
         Falar no WhatsApp agora
       </a>
-    </div>
+    </div>${service.googleReview ? `
+    <p class="hero__rating reveal">${service.googleReview.url ? `<a href="${esc(service.googleReview.url)}" target="_blank" rel="noopener">` : ""}<span class="hero__stars" aria-hidden="true">★★★★★</span> ${esc(service.googleReview.nota)} no Google — ${service.googleReview.total} avaliações${service.googleReview.url ? "</a>" : ""}</p>` : ""}
   </div>
 </section>
 
-<section class="section service-detail">
+${service.pains ? painsHtml(service) : ""}<section class="section service-detail">
   <div class="container service-detail__grid">
     <div class="service-detail__media reveal">
       <img src="../${service.detailImg}" alt="${esc(service.detailAlt)}" loading="lazy">
@@ -369,7 +438,8 @@ const outDir = path.join(__dirname, "..", "servicos");
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
 
 SERVICES.forEach(service => {
-  const html = page(service);
+  let html = page(service);
+  if (service.landing) html = recompor(html, service);
   fs.writeFileSync(path.join(outDir, `${service.slug}.html`), html, "utf8");
   console.log("Gerado:", service.slug + ".html");
 });
