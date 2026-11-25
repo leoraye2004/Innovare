@@ -198,7 +198,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../css/styles.css?v=${service.landing ? 19 : 17}">
+<link rel="stylesheet" href="../css/styles.css?v=${service.landing ? 20 : 17}">
 
 <script type="application/ld+json">
 ${serviceJsonLd(service)}
